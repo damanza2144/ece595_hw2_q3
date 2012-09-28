@@ -4,15 +4,18 @@
   <tr>
     <th>Post</th>
     <th>Body</th>
+	<th>Commented by</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
 <% @comments.each do |comment| %>
+	<% @user = User.find(comment.user_id) %>
   <tr>
     <td><%= comment.post_id %></td>
     <td><%= comment.body %></td>
+	<td><%= @user.name %></td>
     <td><%= link_to 'Show', comment %></td>
     <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
     <td><%= link_to 'Destroy', comment, confirm: 'Are you sure?', method: :delete %></td>

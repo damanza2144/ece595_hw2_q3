@@ -1,4 +1,6 @@
 <%= div_for @post do %>
+	<% @user = User.find(@post.user_id) %>
+	<h2> Post created by: <%= @user.name %> </h2>
 	<h2><%= link_to_unless_current h(@post.title) %></h2>
 	<%= simple_format h(@post.body) %>
 <% end %>

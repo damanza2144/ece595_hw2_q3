@@ -1,4 +1,16 @@
 Blog::Application.routes.draw do
+
+  get 'admin' => 'admin#index'
+  #get 'user' => 'post#index'
+
+  controller :sessions do
+	get 'login' => :new
+	post 'login' => :create
+	delete 'logout' => :destroy
+  end
+
+  resources :users
+
   resources :comments
 
   resources :posts do 

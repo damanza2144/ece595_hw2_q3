@@ -11,6 +11,11 @@
     </div>
   <% end %>
 
+  <p>
+	<% @user = User.find(@post.user_id) %>
+	Submitted by: <%= @user.name %>
+  </p>
+  
   <div class="field">
     <%= f.label :title %><br />
     <%= f.text_field :title %>

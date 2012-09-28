@@ -1,18 +1,24 @@
-<h1>Listing posts</h1>
+<% @current_user = User.find(session[:user_id]) %>
+<h1>Welcome <%= @current_user.name %> </h1> <br>
+
+<h1>Listing posts</h1> <br>
 
 <table>
   <tr>
     <th>Title</th>
     <th>Body</th>
+	<th>Posted by User</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
 <% @posts.each do |post| %>
+	<% @user = User.find(post.user_id) %>
   <tr>
     <td><%= post.title %></td>
     <td><%= post.body %></td>
+	<td><%= @user.name %></td>
     <td><%= link_to 'Show', post %></td>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
     <td><%= link_to 'Destroy', post, confirm: 'Are you sure?', method: :delete %></td>

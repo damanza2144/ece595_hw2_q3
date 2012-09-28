@@ -3,7 +3,8 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all
+
+	@comments = Comment.all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -14,7 +15,8 @@ class CommentsController < ApplicationController
   # GET /comments/1
   # GET /comments/1.json
   def show
-    @comment = Comment.find(params[:id])
+    
+	@comment = Comment.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -25,7 +27,8 @@ class CommentsController < ApplicationController
   # GET /comments/new
   # GET /comments/new.json
   def new
-    @comment = Comment.new
+    
+	@comment = Comment.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,19 +38,26 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
+  
     @comment = Comment.find(params[:id])
+  
   end
 
   # POST /comments
   # POST /comments.json
   def create
   
+    @user = User.find(session[:user_id])
 	@post = Post.find(params[:post_id])
-    @comment = @post.comments.create!(params[:comment])
-
+	
+	@comment = @user.comments.create(params[:comment])
+	@comment.post_id = @post.id
+	
+	@username = @user.name
+	
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        format.html { redirect_to @comment, notice: 'Comment was successfully created by ' + @username + '.' }
         format.json { render json: @comment, status: :created, location: @comment }
 		format.js 	# call views\comments\create.js.erb
       else

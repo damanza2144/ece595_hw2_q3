@@ -10,6 +10,11 @@
   <%= @comment.body %>
 </p>
 
+<p>
+	<b>Posted by:</b>
+	<% @user = User.find(@comment.user_id) %>
+	<%= @user.name %>
+</p>
 
 <%= link_to 'Edit', edit_comment_path(@comment) %> |
 <%= link_to 'Back', comments_path %>
