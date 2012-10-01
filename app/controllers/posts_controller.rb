@@ -88,9 +88,8 @@ class PostsController < ApplicationController
 		end
 	else
 		respond_to do |format|
-			format.html { render action: "edit" }
+			format.html { redirect_to posts_url, notice: 'Sorry, you cannot update a post that you did not create.' }
 			format.json { render json: @post.errors, status: :unprocessable_entity }
-			#format.js	# calls views\posts\update.js.erb
 		end
 	end
   end
@@ -117,9 +116,8 @@ class PostsController < ApplicationController
 
 	else
 		respond_to do |format|
-			format.html { redirect_to posts_url }
+			format.html { redirect_to posts_url, notice: 'Sorry, you cannot destroy a post that you did not create.' }
 			format.json { head :no_content }
-			#format.js	# calls views\posts\destroy.js.erb
 		end
 	end
   end

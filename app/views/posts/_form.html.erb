@@ -12,8 +12,21 @@
   <% end %>
 
   <p>
-	<% @user = User.find(@post.user_id) %>
-	Submitted by: <%= @user.name %>
+	<% 
+	@username = ""
+	if @post.user_id == nil
+		@username = ""
+	else
+		@user = User.find(@post.user_id) 
+		
+		if @user == nil
+			@username = ""
+		else
+			@username = @user.name
+		end
+	end
+	%>
+	Submitted by: <%= @username %>
   </p>
   
   <div class="field">
